@@ -28,6 +28,14 @@ keys described here are not exclusive.
   // the GeocodeJSON spec that is implemented by this instance.
   "version": "0.1.0",
 
+  // OPTIONAL. Default: null. The licence of the data. In case of multiple sources,
+  // and then multiple licences, can be an object with one key by source.
+  "licence": "ODbL",
+
+  // OPTIONAL. Default: null. The attribution of the data. In case of multiple sources,
+  // and then multiple attributions, can be an object with one key by source.
+  "attribution": "OpenStreetMap Contributors",
+
   // OPTIONAL. Default: null. The query that has been issued to trigger the
   // search.
   "query": "24 allée de Bercy 75012 Paris",
