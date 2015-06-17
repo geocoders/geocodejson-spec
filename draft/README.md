@@ -103,7 +103,7 @@ keys described here are not exclusive.
       "level6": "Nord"
     }
 
-    // OPTIONAL. Result accuracy, in meters.
+    // OPTIONAL. Geohash encoding of coordinates (see http://geohash.org/site/tips.html).
     "geohash" : "Ehugh5oofiToh9aWe3heemu7ighee8",
 
   },
