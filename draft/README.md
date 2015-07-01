@@ -114,8 +114,8 @@ keys described here are not exclusive.
   // REQUIRED. As per GeoJSON spec.
   "geometry": {
     "coordinates": [
-      "2.889957",
-      "50.687328"
+      2.889957,
+      50.687328
     ],
     "type": "Point"
   }
