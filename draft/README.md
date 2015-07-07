@@ -24,21 +24,26 @@ keys described here are not exclusive.
   // REQUIRED. GeocodeJSON result is a FeatureCollection.
   "type": "FeatureCollection",
 
-  // REQUIRED. A semver.org compliant version number. Describes the version of
-  // the GeocodeJSON spec that is implemented by this instance.
-  "version": "0.1.0",
+  // REQUIRED. Namespace.
+  "geocoding": {
 
-  // OPTIONAL. Default: null. The licence of the data. In case of multiple sources,
-  // and then multiple licences, can be an object with one key by source.
-  "licence": "ODbL",
+    // REQUIRED. A semver.org compliant version number. Describes the version of
+    // the GeocodeJSON spec that is implemented by this instance.
+    "version": "0.1.0",
 
-  // OPTIONAL. Default: null. The attribution of the data. In case of multiple sources,
-  // and then multiple attributions, can be an object with one key by source.
-  "attribution": "OpenStreetMap Contributors",
+    // OPTIONAL. Default: null. The licence of the data. In case of multiple sources,
+    // and then multiple licences, can be an object with one key by source.
+    "licence": "ODbL",
 
-  // OPTIONAL. Default: null. The query that has been issued to trigger the
-  // search.
-  "query": "24 allée de Bercy 75012 Paris",
+    // OPTIONAL. Default: null. The attribution of the data. In case of multiple sources,
+    // and then multiple attributions, can be an object with one key by source.
+    "attribution": "OpenStreetMap Contributors",
+
+    // OPTIONAL. Default: null. The query that has been issued to trigger the
+    // search.
+    "query": "24 allée de Bercy 75012 Paris",
+
+  },
 
   // REQUIRED. As per GeoJSON spec.
   "features": [
@@ -55,56 +60,60 @@ keys described here are not exclusive.
   // REQUIRED. As per GeoJSON spec.
   "properties": {
 
-    // REQUIRED. One of "house", "street", "locality", "city", "region", "country".
-    // TODO: make a clean list of common cases, plus make clear that the list
-    // isn't meant to be closed.
-    "type": "house",
+    // REQUIRED. Namespace.
+    "geocoding": {
 
-    // OPTIONAL. Result accuracy, in meters.
-    "accuracy": 20,
+      // REQUIRED. One of "house", "street", "locality", "city", "region", "country".
+      // TODO: make a clean list of common cases, plus make clear that the list
+      // isn't meant to be closed.
+      "type": "house",
 
-    // RECOMMENDED. Suggested label for the result.
-    "label": "My Shoes Shop, 64 rue de Metz 59280 Armentières",
+      // OPTIONAL. Result accuracy, in meters.
+      "accuracy": 20,
 
-    // OPTIONAL. Name of the place.
-    "name": "My Shoes Shop",
+      // RECOMMENDED. Suggested label for the result.
+      "label": "My Shoes Shop, 64 rue de Metz 59280 Armentières",
 
-    // OPTIONAL. Housenumber of the place.
-    // TODO: what about the suffix (64A, 64 bis, etc.)?
-    "housenumber": "64",
+      // OPTIONAL. Name of the place.
+      "name": "My Shoes Shop",
 
-    // OPTIONAL. Street of the place.
-    "street": "Rue de Metz",
+      // OPTIONAL. Housenumber of the place.
+      // TODO: what about the suffix (64A, 64 bis, etc.)?
+      "housenumber": "64",
 
-    // OPTIONAL. Postcode of the place.
-    "postcode": "59280",
+      // OPTIONAL. Street of the place.
+      "street": "Rue de Metz",
 
-    // OPTIONAL. City of the place.
-    "city": "Armentières",
+      // OPTIONAL. Postcode of the place.
+      "postcode": "59280",
 
-    // OPTIONAL. District of the place.
-    "district": null,
+      // OPTIONAL. City of the place.
+      "city": "Armentières",
 
-    // OPTIONAL. County of the place.
-    "county": null,
+      // OPTIONAL. District of the place.
+      "district": null,
 
-    // OPTIONAL. State of the place.
-    "state": null,
+      // OPTIONAL. County of the place.
+      "county": null,
 
-    // OPTIONAL. Country of the place.
-    "country": "France",
+      // OPTIONAL. State of the place.
+      "state": null,
 
-    // OPTIONAL. Administratives boundaries the feature is included in,
-    // as defined in http://wiki.osm.org/wiki/Key:admin_level#admin_level
-    // TODO is there some still generic but less OSMish scheme?
-    "admin": {
-      "level2": "France",
-      "level4": "Nord-Pas-de-Calais",
-      "level6": "Nord"
+      // OPTIONAL. Country of the place.
+      "country": "France",
+
+      // OPTIONAL. Administratives boundaries the feature is included in,
+      // as defined in http://wiki.osm.org/wiki/Key:admin_level#admin_level
+      // TODO is there some still generic but less OSMish scheme?
+      "admin": {
+        "level2": "France",
+        "level4": "Nord-Pas-de-Calais",
+        "level6": "Nord"
+      },
+
+      // OPTIONAL. Geohash encoding of coordinates (see http://geohash.org/site/tips.html).
+      "geohash" : "Ehugh5oofiToh9aWe3heemu7ighee8",
     }
-
-    // OPTIONAL. Geohash encoding of coordinates (see http://geohash.org/site/tips.html).
-    "geohash" : "Ehugh5oofiToh9aWe3heemu7ighee8",
 
   },
 
