@@ -88,6 +88,9 @@ keys described here are not exclusive.
       // OPTIONAL. Street of the place.
       "street": "Rue de Metz",
 
+      // OPTIONAL. Locality of the place.
+      "locality": "Les Clarons",
+
       // OPTIONAL. Postcode of the place.
       "postcode": "59280",
 
