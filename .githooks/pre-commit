@@ -1,0 +1,49 @@
+#!/bin/bash
+
+INPUT_DIR=src
+OUTPUT_DIR=draft
+
+SCHEMA_FILE=geocodejson.schema.json
+
+SHA_CMD=shasum
+SHA_VERSION=512
+SHA_PREFIX="sha$SHA_VERSION"
+
+NPX_CMD=npx
+JSON_DEREFERENCE_CLI_VERSION="0.1.2"
+BUNDLE_SCHEMA_CMD="$NPX_CMD -y json-dereference-cli@$JSON_DEREFERENCE_CLI_VERSION"
+
+# JSON schema file must exist
+if [ ! -f "$INPUT_DIR/$SCHEMA_FILE" ]
+then
+    echo "$SCHEMA_FILE file in $INPUT_DIR folder is missing, abort"
+    exit 1
+fi
+
+# npx must be installed
+if ! command -v $NPX_CMD &> /dev/null
+then
+    echo "$NPX_CMD could not be found, please install it"
+    exit 1
+fi
+
+# Create bundles
+$BUNDLE_SCHEMA_CMD -s $INPUT_DIR/$SCHEMA_FILE -o $OUTPUT_DIR/$SCHEMA_FILE 2> /dev/null
+
+# shasum must be installed
+if ! command -v $SHA_CMD &> /dev/null
+then
+    echo "$SHA_CMD could not be found, please install it"
+    exit 1
+fi
+
+# Compute checksums
+SHA_SCHEMA_CHECKSUM=`$SHA_CMD -a $SHA_VERSION $OUTPUT_DIR/$SCHEMA_FILE | cut -d" " -f 1`
+
+echo "Checksum ($OUTPUT_DIR/$SCHEMA_FILE.checksum): $SHA_PREFIX-$SHA_SCHEMA_CHECKSUM"
+echo -n "$SHA_PREFIX-$SHA_SCHEMA_CHECKSUM" > $OUTPUT_DIR/$SCHEMA_FILE.checksum
+
+# Stage new checksums
+git add $OUTPUT_DIR/$SCHEMA_FILE.checksum
+
+exit 0
