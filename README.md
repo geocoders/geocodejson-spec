@@ -12,11 +12,11 @@ Please verify the integrity of the JSON schema using the SHA-512 checksum provid
 
 ## How to contribute
 
-Pre-requisites: [git](https://git-scm.com/), [make](https://www.gnu.org/software/make/), shasum [npx](https://www.npmjs.com/package/npx) (node and npm).
+Pre-requisites: [git](https://git-scm.com/), [make](https://www.gnu.org/software/make/), [shasum](https://www.commandlinux.com/man-page/man1/shasum.1.html), [npx](https://www.npmjs.com/package/npx) (node and npm).
 
 Please follow these steps:
 
-- Let the community knows you want to contibute opening an issue
+- Let the community knows you want to contribute opening an issue
 - Fork this repo, clone it locally and create a new branch
 - Install git hooks running `make hooks`
 - Extend the [draft document]((https://github.com/jenkin/geocodejson-spec/blob/master/draft/README.md))
