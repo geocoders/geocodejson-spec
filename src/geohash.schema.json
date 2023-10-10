@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://geohash.org/geohash.schema.json",
+    "type": "string",
+    "pattern": "^[0123456789bcdefghjkmnpqrstuvwxyz]+(:.+)?$",
+    "description": "Geohash encoding of coordinates (see http://geohash.org and https://en.wikipedia.org/wiki/Geohash).",
+    "examples": [
+        "6gkzmg1w",
+        "6gkzwgjzn820",
+        "c216ne:Mt_Hood"
+    ]
+}

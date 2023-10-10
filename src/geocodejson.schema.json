@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://sparkfabrik.github.io/nominatim-openapi/geocodejson.schema.json",
+    "$id": "https://geocoders.github.io/geocodejson-spec/draft/geocodejson.schema.json",
     "title": "GeocodeJSON Schema",
     "description": "GeocodeJSON is an extension of the GeoJSON standard that aim to handle results from geocoding services.",
     "allOf": [
@@ -8,14 +8,6 @@
             "$ref": "https://geojson.org/schema/GeoJSON.json"
         },
         {
-            "$ref": "#/$defs/FeatureCollectionGeocoding"
-        },
-        {
-            "$ref": "#/$defs/FeatureGeocoding"
-        }
-    ],
-    "$defs": {
-        "FeatureCollectionGeocoding": {
             "type": "object",
             "properties": {
                 "type": {
@@ -27,16 +19,7 @@
                     "description": "REQUIRED. Namespace.",
                     "properties": {
                         "version": {
-                            "type": "string",
-                            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
-                            "minLength": 5,
-                            "maxLength": 256,
-                            "description": "REQUIRED. A semver.org compliant version number. Describes the version of the GeocodeJSON spec that is implemented by this instance.",
-                            "examples": [
-                                "0.1.0",
-                                "1.0.0-beta1",
-                                "2.2.4"
-                            ]
+                            "$ref": "semver.schema.json"
                         },
                         "licence": {
                             "type": "string",
@@ -69,7 +52,7 @@
                 "geocoding"
             ]
         },
-        "FeatureGeocoding": {
+        {
             "type": "object",
             "properties": {
                 "features": {
@@ -191,14 +174,7 @@
                                                 }
                                             },
                                             "geohash": {
-                                                "type": "string",
-                                                "pattern": "^[0123456789bcdefghjkmnpqrstuvwxyz]+(:.+)?$",
-                                                "description": "OPTIONAL. Geohash encoding of coordinates (see http://geohash.org and https://en.wikipedia.org/wiki/Geohash).",
-                                                "examples": [
-                                                    "6gkzmg1w",
-                                                    "6gkzwgjzn820",
-                                                    "c216ne:Mt_Hood"
-                                                ]
+                                                "$ref": "geohash.schema.json"
                                             }
                                         },
                                         "required": [
@@ -215,5 +191,5 @@
                 }
             }
         }
-    }
+    ]
 }
