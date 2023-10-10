@@ -1,200 +1,219 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "https://sparkfabrik.github.io/nominatim-openapi/geocodejson.schema.json",
     "title": "GeocodeJSON Schema",
     "description": "GeocodeJSON is an extension of the GeoJSON standard that aim to handle results from geocoding services.",
-    "type": "object",
     "allOf": [
         {
             "$ref": "https://geojson.org/schema/GeoJSON.json"
+        },
+        {
+            "$ref": "#/$defs/FeatureCollectionGeocoding"
+        },
+        {
+            "$ref": "#/$defs/FeatureGeocoding"
         }
     ],
-    "properties": {
-        "type": {
-            "const": "FeatureCollection",
-            "description": "REQUIRED. GeocodeJSON result is a FeatureCollection."
-        },
-        "geocoding": {
+    "$defs": {
+        "FeatureCollectionGeocoding": {
             "type": "object",
-            "description": "REQUIRED. Namespace.",
             "properties": {
-                "version": {
-                    "type": "string",
-                    "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
-                    "description": "REQUIRED. A semver.org compliant version number. Describes the version of the GeocodeJSON spec that is implemented by this instance.",
-                    "examples": [
-                        "0.1.0",
-                        "1.0.0-beta1",
-                        "2.2.4"
-                    ]
+                "type": {
+                    "const": "FeatureCollection",
+                    "description": "REQUIRED. GeocodeJSON result is a FeatureCollection."
                 },
-                "licence": {
-                    "type": "string",
-                    "description": "OPTIONAL. Default: null. The licence of the data. In case of multiple sources, and then multiple licences, can be an object with one key by source.",
-                    "examples": [
-                        "ODbL"
-                    ]
-                },
-                "attribution": {
-                    "type": "string",
-                    "description": "OPTIONAL. Default: null. The attribution of the data. In case of multiple sources, and then multiple attributions, can be an object with one key by source.",
-                    "examples": [
-                        "OpenStreetMap Contributors"
-                    ]
-                },
-                "query": {
-                    "type": "string",
-                    "description": "OPTIONAL. Default: null. The query that has been issued to trigger the search.",
-                    "examples": [
-                        "24 allée de Bercy 75012 Paris"
+                "geocoding": {
+                    "type": "object",
+                    "description": "REQUIRED. Namespace.",
+                    "properties": {
+                        "version": {
+                            "type": "string",
+                            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+                            "minLength": 5,
+                            "maxLength": 256,
+                            "description": "REQUIRED. A semver.org compliant version number. Describes the version of the GeocodeJSON spec that is implemented by this instance.",
+                            "examples": [
+                                "0.1.0",
+                                "1.0.0-beta1",
+                                "2.2.4"
+                            ]
+                        },
+                        "licence": {
+                            "type": "string",
+                            "description": "OPTIONAL. Default: null. The licence of the data. In case of multiple sources, and then multiple licences, can be an object with one key by source.",
+                            "examples": [
+                                "ODbL"
+                            ]
+                        },
+                        "attribution": {
+                            "type": "string",
+                            "description": "OPTIONAL. Default: null. The attribution of the data. In case of multiple sources, and then multiple attributions, can be an object with one key by source.",
+                            "examples": [
+                                "OpenStreetMap Contributors"
+                            ]
+                        },
+                        "query": {
+                            "type": "string",
+                            "description": "OPTIONAL. Default: null. The query that has been issued to trigger the search.",
+                            "examples": [
+                                "24 allée de Bercy 75012 Paris"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "version"
                     ]
                 }
             },
             "required": [
-                "version"
+                "geocoding"
             ]
         },
-        "features": {
-            "type": "array",
-            "description": "REQUIRED. As per GeoJSON spec.",
-            "items": {
-                "type": "object",
-                "description": "OPTIONAL. An array of feature objects.",
-                "properties": {
-                    "type": {
-                        "const": "Feature",
-                        "description": "REQUIRED. As per GeoJSON spec."
-                    },
-                    "properties": {
+        "FeatureGeocoding": {
+            "type": "object",
+            "properties": {
+                "features": {
+                    "type": "array",
+                    "description": "REQUIRED. As per GeoJSON spec.",
+                    "items": {
                         "type": "object",
-                        "description": "REQUIRED. As per GeoJSON spec.",
+                        "description": "OPTIONAL. An array of feature objects.",
                         "properties": {
-                            "geocoding": {
+                            "type": {
+                                "const": "Feature",
+                                "description": "REQUIRED. As per GeoJSON spec."
+                            },
+                            "properties": {
                                 "type": "object",
-                                "description": "REQUIRED. Namespace.",
+                                "description": "REQUIRED. As per GeoJSON spec.",
                                 "properties": {
-                                    "type": {
-                                        "type": "string",
-                                        "description": "REQUIRED. One of house, street, locality, city, region, country.",
-                                        "examples": [
-                                            "house",
-                                            "street",
-                                            "district",
-                                            "city",
-                                            "county",
-                                            "state",
-                                            "country",
-                                            "locality"
-                                        ]
-                                    },
-                                    "accuracy": {
-                                        "type": "number",
-                                        "minimum": 0,
-                                        "description": "OPTIONAL. Result accuracy, in meters.",
-                                        "examples": [
-                                            20
-                                        ]
-                                    },
-                                    "label": {
-                                        "type": "string",
-                                        "description": "RECOMMENDED. Suggested label for the result.",
-                                        "examples": [
-                                            "My Shoes Shop, 64 rue de Metz 59280 Armentières"
-                                        ]
-                                    },
-                                    "name": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. Name of the place.",
-                                        "examples": [
-                                            "My Shoes Shop"
-                                        ]
-                                    },
-                                    "housenumber": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. Housenumber of the place.",
-                                        "examples": [
-                                            "64"
-                                        ]
-                                    },
-                                    "street": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. Street of the place.",
-                                        "examples": [
-                                            "Rue de Metz"
-                                        ]
-                                    },
-                                    "locality": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. Locality of the place.",
-                                        "examples": [
-                                            "Les Clarons"
-                                        ]
-                                    },
-                                    "postcode": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. Postcode of the place.",
-                                        "examples": [
-                                            "59280"
-                                        ]
-                                    },
-                                    "city": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. City of the place.",
-                                        "examples": [
-                                            "Armentières"
-                                        ]
-                                    },
-                                    "district": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. District of the place."
-                                    },
-                                    "county": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. County of the place."
-                                    },
-                                    "state": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. State of the place."
-                                    },
-                                    "country": {
-                                        "type": "string",
-                                        "description": "OPTIONAL. Country of the place.",
-                                        "examples": [
-                                            "France"
-                                        ]
-                                    },
-                                    "admin": {
+                                    "geocoding": {
                                         "type": "object",
-                                        "description": "OPTIONAL. Administratives boundaries the feature is included in, as defined in http://wiki.osm.org/wiki/Key:admin_level#admin_level.",
-                                        "patternProperties": {
-                                            "^level[0-9]+": {
-                                                "type": "string"
+                                        "description": "REQUIRED. Namespace.",
+                                        "properties": {
+                                            "type": {
+                                                "type": "string",
+                                                "description": "REQUIRED. One of house, street, locality, city, region, country.",
+                                                "examples": [
+                                                    "house",
+                                                    "street",
+                                                    "district",
+                                                    "city",
+                                                    "county",
+                                                    "state",
+                                                    "country",
+                                                    "locality"
+                                                ]
+                                            },
+                                            "accuracy": {
+                                                "type": "number",
+                                                "minimum": 0,
+                                                "description": "OPTIONAL. Result accuracy, in meters.",
+                                                "examples": [
+                                                    20
+                                                ]
+                                            },
+                                            "label": {
+                                                "type": "string",
+                                                "description": "RECOMMENDED. Suggested label for the result.",
+                                                "examples": [
+                                                    "My Shoes Shop, 64 rue de Metz 59280 Armentières"
+                                                ]
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. Name of the place.",
+                                                "examples": [
+                                                    "My Shoes Shop"
+                                                ]
+                                            },
+                                            "housenumber": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. Housenumber of the place.",
+                                                "examples": [
+                                                    "64"
+                                                ]
+                                            },
+                                            "street": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. Street of the place.",
+                                                "examples": [
+                                                    "Rue de Metz"
+                                                ]
+                                            },
+                                            "locality": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. Locality of the place.",
+                                                "examples": [
+                                                    "Les Clarons"
+                                                ]
+                                            },
+                                            "postcode": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. Postcode of the place.",
+                                                "examples": [
+                                                    "59280"
+                                                ]
+                                            },
+                                            "city": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. City of the place.",
+                                                "examples": [
+                                                    "Armentières"
+                                                ]
+                                            },
+                                            "district": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. District of the place."
+                                            },
+                                            "county": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. County of the place."
+                                            },
+                                            "state": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. State of the place."
+                                            },
+                                            "country": {
+                                                "type": "string",
+                                                "description": "OPTIONAL. Country of the place.",
+                                                "examples": [
+                                                    "France"
+                                                ]
+                                            },
+                                            "admin": {
+                                                "type": "object",
+                                                "description": "OPTIONAL. Administratives boundaries the feature is included in, as defined in http://wiki.osm.org/wiki/Key:admin_level#admin_level.",
+                                                "patternProperties": {
+                                                    "^level[0-9]+$": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "geohash": {
+                                                "type": "string",
+                                                "pattern": "^[0123456789bcdefghjkmnpqrstuvwxyz]+(:.+)?$",
+                                                "description": "OPTIONAL. Geohash encoding of coordinates (see http://geohash.org and https://en.wikipedia.org/wiki/Geohash).",
+                                                "examples": [
+                                                    "6gkzmg1w",
+                                                    "6gkzwgjzn820",
+                                                    "c216ne:Mt_Hood"
+                                                ]
                                             }
-                                        }
-                                    },
-                                    "geohash": {
-                                        "type": "string",
-                                        "pattern": "^[a-zA-Z0-9]+(:.+)?$",
-                                        "description": "OPTIONAL. Geohash encoding of coordinates (see http://geohash.org/site/tips.html).",
-                                        "examples": [
-                                            "Ehugh5oofiToh9aWe3heemu7ighee8"
+                                        },
+                                        "required": [
+                                            "type"
                                         ]
                                     }
                                 },
                                 "required": [
-                                    "type"
+                                    "geocoding"
                                 ]
                             }
-                        },
-                        "required": [
-                            "geocoding"
-                        ]
+                        }
                     }
                 }
             }
         }
-    },
-    "required": [
-        "geocoding"
-    ]
+    }
 }

@@ -18,6 +18,6 @@ bundle:
 
 validate:
 	echo "Validating spec bundle"
-	npx -y ajv-cli@$(AJV_CLI_VERSION) compile --spec=draft2020 -s draft/geocodejson.schema.json
+	npx -y ajv-cli@$(AJV_CLI_VERSION) compile -s draft/geocodejson.schema.json
 
 build: bundle validate checksum verify
