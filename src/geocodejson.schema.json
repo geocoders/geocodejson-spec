@@ -2,13 +2,14 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "https://geocoders.github.io/geocodejson-spec/draft/geocodejson.schema.json",
     "title": "GeocodeJSON Schema",
-    "description": "GeocodeJSON is an extension of the GeoJSON standard that aim to handle results from geocoding services.",
+    "description": "GeocodeJSON is an extension of the GeoJSON format and it is an attempt to create a standard for handling geocoding results.",
     "allOf": [
         {
             "$ref": "https://geojson.org/schema/GeoJSON.json"
         },
         {
             "type": "object",
+            "description": "GeocodeJSON extension of GeoJSON Feature Collection",
             "properties": {
                 "type": {
                     "const": "FeatureCollection",
@@ -19,25 +20,26 @@
                     "description": "REQUIRED. Namespace.",
                     "properties": {
                         "version": {
-                            "$ref": "semver.schema.json"
+                            "$ref": "semver.schema.json",
+                            "description": "A semver.org compliant version number. Describes the version of the GeocodeJSON spec that is implemented by this instance."
                         },
                         "licence": {
                             "type": "string",
-                            "description": "OPTIONAL. Default: null. The licence of the data. In case of multiple sources, and then multiple licences, can be an object with one key by source.",
+                            "description": "OPTIONAL. The licence of the data. In case of multiple sources, and then multiple licences, can be an object with one key by source.",
                             "examples": [
                                 "ODbL"
                             ]
                         },
                         "attribution": {
                             "type": "string",
-                            "description": "OPTIONAL. Default: null. The attribution of the data. In case of multiple sources, and then multiple attributions, can be an object with one key by source.",
+                            "description": "OPTIONAL. The attribution of the data. In case of multiple sources, and then multiple attributions, can be an object with one key by source.",
                             "examples": [
                                 "OpenStreetMap Contributors"
                             ]
                         },
                         "query": {
                             "type": "string",
-                            "description": "OPTIONAL. Default: null. The query that has been issued to trigger the search.",
+                            "description": "OPTIONAL. The query that has been issued to trigger the search.",
                             "examples": [
                                 "24 allée de Bercy 75012 Paris"
                             ]
@@ -54,6 +56,7 @@
         },
         {
             "type": "object",
+            "description": "GeocodeJSON extension of GeoJSON Feature",
             "properties": {
                 "features": {
                     "type": "array",
@@ -174,7 +177,8 @@
                                                 }
                                             },
                                             "geohash": {
-                                                "$ref": "geohash.schema.json"
+                                                "$ref": "geohash.schema.json",
+                                                "description": "OPTIONAL. Geohash encoding of coordinates (see http://geohash.org/site/tips.html)."
                                             }
                                         },
                                         "required": [

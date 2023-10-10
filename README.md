@@ -24,3 +24,7 @@ Please follow these steps:
 - Run `make build`
 - If all is ok, commit your changes and push them
 - Open a Pull Request on the main branch of this repo
+
+## Licence
+
+Public Domain, No Rights Reserved - Creative Commons Zero License ([CC0](https://creativecommons.org/public-domain/cc0/)).
