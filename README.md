@@ -16,12 +16,11 @@ Pre-requisites: [git](https://git-scm.com/), [make](https://www.gnu.org/software
 
 Please follow these steps:
 
-- Let the community knows you want to contribute opening an issue
+- Let the community knows you want to contribute [opening an issue](https://github.com/geocoders/geocodejson-spec/issues)
 - Fork this repo, clone it locally and create a new branch
-- Install git hooks running `make hooks`
-- Extend the [draft document]((https://github.com/geocoders/geocodejson-spec/blob/master/draft/README.md))
+- Edit the [draft document]((https://github.com/geocoders/geocodejson-spec/blob/master/draft/README.md))
 - Update the [JSON schema](https://github.com/geocoders/geocodejson-spec/blob/master/draft/geocodejson.schema.json) in `src/` folder
-- Run `make build`
+- Run `make`
 - If all is ok, commit your changes and push them
 - Open a Pull Request on the main branch of this repo
 
