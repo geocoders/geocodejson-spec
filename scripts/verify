@@ -1,0 +1,44 @@
+#!/bin/bash
+
+INPUT_DIR=src
+OUTPUT_DIR=draft
+
+SCHEMA_FILE=geocodejson.schema.json
+
+SHA_CMD=shasum
+SHA_VERSION=512
+SHA_PREFIX="sha$SHA_VERSION"
+
+# JSON schema file must exist
+if [ ! -f "$OUTPUT_DIR/$SCHEMA_FILE" ]
+then
+    echo "$SCHEMA_FILE file in $INPUT_DIR folder is missing, abort"
+    exit 1
+fi
+
+# shasum must be installed
+if ! command -v $SHA_CMD &> /dev/null
+then
+    echo "$SHA_CMD could not be found, please install it"
+    exit 1
+fi
+
+# Checksums must exists
+if [ ! -f "$OUTPUT_DIR/$SCHEMA_FILE.checksum" ]
+then
+    echo "$SCHEMA_FILE.checksum file in $OUTPUT_DIR folder is missing, abort"
+    exit 1
+fi
+
+# Compute checksums
+SHA_SCHEMA_CHECKSUM=`$SHA_CMD -a $SHA_VERSION $OUTPUT_DIR/$SCHEMA_FILE | cut -d" " -f 1`
+
+if ! grep "$SHA_PREFIX-$SHA_SCHEMA_CHECKSUM" $OUTPUT_DIR/$SCHEMA_FILE.checksum &>/dev/null
+then
+    echo "Wrong checksum for $OUTPUT_DIR/$SCHEMA_FILE, please verify"
+    exit 1
+else
+    echo "Checksum ($OUTPUT_DIR/$SCHEMA_FILE): $SHA_PREFIX-$SHA_SCHEMA_CHECKSUM"
+fi
+
+exit 0

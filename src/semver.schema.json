@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://semver.org/semver.schema.json",
+    "type": "string",
+    "description": "A semver.org compliant version number (see https://semver.org).",
+    "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+    "minLength": 5,
+    "maxLength": 256,
+    "examples": [
+        "0.1.0",
+        "1.0.0-beta.1",
+        "1.0.0-0.3.7",
+        "2.2.4"
+    ]
+}
